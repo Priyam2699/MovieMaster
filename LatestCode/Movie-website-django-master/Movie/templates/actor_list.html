@@ -7,7 +7,7 @@
             <div id="detail-infro">
                 <h1>{{ object.title }}</h1>
 
-{#                    {% if  true %}#}
+                    {% if  user.is_authenticated %}
                     <button class="add_button" id="seen">Have seen</button>
 
                     <b style="color: #f44336" id="message"></b>
@@ -16,7 +16,7 @@
                             $("#seen").css({"background-color": "#f44336", "color": "white"});
                         </script>
                     {% endif %}
-{#                    {% endif %}#}
+                    {% endif %}
 
             <script>
                     $(document).ready(function () {
