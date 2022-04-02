@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>IMDB Clone</title>
+    {% load static %}
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" id="bootstrap-css">
+    <script src="{% static "js/jquery-1.10.2.min.js.download" %}"></script>
+    <script src="{% static "js/bootstrap.min.js.download" %}"></script>
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-social.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+    <style type="text/css"></style>
+</head>
+
+{% load static %}
+<body>
+
+<nav class="navbar navbar-default navbar-inverse" role="navigation" style="margin-bottom: 0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <span class="glyphicon glyphicon-home"></span> Home</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/movie/actor_all/1"><span class="glyphicon glyphicon-user"></span> Actors</a>
+                </li>
+            </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <p class="navbar-text" style="color:#fff9fe;">
+                            Welcome, Sahil</p></li>
+                    <li class="dropdown">
+                        <a href="http://bootsnipp-env.elasticbeanstalk.com/iframe/DV3m4#" class="dropdown-toggle"
+                           data-toggle="dropdown">myMovies<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/movie/seen/">Seen List</a></li>
+
+                        </ul>
+                    </li>
+
+            </ul>
+        </div>
+    </div> #main div
+</nav>
+
+
+{% block mainbody %}
+    {% load static %}
+    <div style=" margin-left: 1%;">
+        <p style="color: black; font-size: large; padding-top: 25px"><b>Trending Now:</b></p>
+        {% for movie in popular %}
+            <a href="/movie/movie_detail/{{ movie.movieid }}">
+                <img id="poster" style="margin-left: 10px; margin-bottom: 5px" class="img-rounded" src="{{ movie.poster }}" width="170" height="220">
+            </a>
+        {% endfor %}
+    </div>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+
+     <div style=" margin-left: 1%;">
+        <p style="color: black; font-size: large; padding-top: 25px;"><b>Recommendation For You:</b></p>
+        {% for movie in recommendation %}
+            <a href="/movie/movie_detail/{{ movie.movieid }}">
+                <img id="poster" style="margin-left: 10px;margin-bottom: 5px" class="img-rounded, mainpgmovies" src="{{ movie.poster }}" width="170" height="220">
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+</body>
+</html>

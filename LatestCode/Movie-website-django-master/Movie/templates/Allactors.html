@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block mainbody %}
+    <div id="container">
+        {% for object in items %}
+            <table>
+                <td>
+                    <img src="{{ object.photo }}" alt="Error Loading the photo" height="260" width="200" style="padding: 5px">
+                </td>
+                <td>
+                    <h4>
+                        <a href="/movie/actor_detail/{{ object.actorid }}">{{ object.name }}</a>
+                    </h4>
+                </td>
+            </table>
+            <hr>
+        {% endfor %}
+
+        {% if pages %}
+            <p>Current Page Number: {{ current_page }} , Total Number of Pages :{{ page_number }}</p>
+            {% if current_page != 1 %}
+                <a href="/movie/actor_all/{{ 1 }}">First</a>
+                <a href="/movie/actor_all/{{ current_page|add:-1 }}">Previous</a>
+            {% endif %}
+
+            {% for page in pages %}
+                {% if page == current_page %}
+                    <b>{{ page }}</b>
+                {% else %}
+                    <a href="/movie/actor_all/{{ page }}" >{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page != page_number %}
+                <a href="/movie/actor_all/{{ current_page|add:-1 }}" >Next</a>
+                <a href="/movie/actor_all/{{ page_number }}" >Last</a>
+            {% endif %}
+        {% endif %}
+
+    </div>
+{% endblock %}
+

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+    <div id="container">
+
+
+        {% if object %}
+            <div id=detail-infro>
+                <h1>{{ object.name }}</h1>
+
+            </div>
+            <div id="main-pic">
+                <img border="0" src="{{ object.photo }}" alt="Cannot load photo, sorry!" width="350" height="400">
+            </div>
+        {% endif %}
+
+
+
+
+{% endblock %}
