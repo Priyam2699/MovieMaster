@@ -8,4 +8,6 @@ urlpatterns = [
     path('actor_all/<int:page>', views.whole_list, name='whole_list'),
     re_path(r'^seen/(?P<movie_id>)', views.seen, name='seen'),
     path('add_seen/<str:movie_id>', views.add_seen, name='seen'),
+    re_path(r'^order/(?P<movie_id>)', views.order, name='order'),
+    path('add_order/<str:movie_id>', views.add_order, name='order'),
 ]

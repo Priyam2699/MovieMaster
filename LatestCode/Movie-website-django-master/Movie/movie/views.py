@@ -1,4 +1,4 @@
-# import Seen as Seen
+
 from django.shortcuts import render
 import django.views.decorators.csrf
 import json
@@ -92,4 +92,39 @@ def seen(request, movie_id):
         movie_id = str(record).split('|')[1]
         movies.append(Movie.objects.get(movieid=movie_id))
     return render(request, 'seen.html', {'items': movies, 'number': len(movies)})
+
+#Order
+def add_order(request, movie_id):
+    if not request.is_secure():
+        history = Order.objects.filter(movieid_id=movie_id, username=request.user.get_username())
+        if len(history) == 0:
+            movie = Popularity.objects.get(movieid_id=movie_id)
+            weight = movie.weight
+            movie.delete()
+            new_record = Popularity(movieid_id=movie_id, weight=weight + 3)
+            new_record.save()
+            new_record = Order(movieid_id=movie_id, username=request.user.get_username())
+            new_record.save()
+            return HttpResponse('1')
+        else:
+            history.delete()
+            return HttpResponse('0')
+
+
+@django.views.decorators.csrf.csrf_protect
+def order(request, movie_id):
+    if request.POST:
+        try:
+            d = Order.objects.get(username=request.user.get_username(), movieid_id=movie_id)
+            d.delete()
+        except:
+            return render(request, '404.html')
+    records = Order.objects.filter(username=request.user.get_username())
+    movies = []
+    for record in records:
+        movie_id = str(record).split('|')[1]
+        movies.append(Movie.objects.get(movieid=movie_id))
+    return render(request, 'order.html', {'items': movies, 'number': len(movies)})
+
+
 

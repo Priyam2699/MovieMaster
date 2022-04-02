@@ -54,3 +54,10 @@ class Seen(models.Model):
 
     def __str__(self):
         return self.username + '|' + self.movieid.movieid
+
+class Order(models.Model):
+    username = models.CharField(max_length=150)
+    movieid = models.ForeignKey('Movie', default=1, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.username + '|' + self.movieid.movieid
