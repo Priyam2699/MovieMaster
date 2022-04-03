@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 @csrf_protect
 def user_login(request):
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+
     print(request)
     if request.POST:
         username = password = ''
@@ -42,3 +42,13 @@ def user_register(request):
             return render(request, 'register.html', {'error': 'Invalid input!', 'form': UserCreationForm()})
     else:
         return render(request, "register.html", {'form': UserCreationForm()})
+
+
+
+def user_email(request):
+    subject = 'Thank you for registering to our site'
+    message = ' it  means a world to us '
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['arshdeepk61@gmail.com',]
+    send_mail( subject, message, email_from, recipient_list )
+    return redirect('redirect to a new page')
