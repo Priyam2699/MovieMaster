@@ -136,7 +136,7 @@ def searchbar(request):
         print(searched)
         all_movies = Movie.objects.filter(title__contains=searched)
         print(all_movies)
-        if len(all_movies) > 1:
+        if len(all_movies) > 0:
             return render(request, 'searchbar.html', {'data': all_movies})
         else:
             return render(request, '404.html')
