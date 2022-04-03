@@ -12,7 +12,7 @@ def index(request):
         movie_dict[movie.movieid] = movie
     popular_movies = Popularity.objects.all().order_by('-weight')
     popular = []
-    for movie in popular_movies[:6]:
+    for movie in popular_movies[:10]:
         try:
             # if is_url_image(movie_dict[movie.movieid_id].poster):
             popular.append({'movieid': movie.movieid_id, 'poster': movie_dict[movie.movieid_id].poster})
@@ -20,10 +20,11 @@ def index(request):
             continue
     data['popular'] = popular
     popular_movie_list = []
-    for movie in popular_movies[:6]:
+    for movie in popular_movies[:10]:
         popular_movie_list.append(movie_dict[movie.movieid_id])
     data['recommendation'] = get_recommendation(request, popular_movie_list)
     return render(request, 'base.html', data)
+
 
 
 def get_recommendation(request, popular_movie_list):
