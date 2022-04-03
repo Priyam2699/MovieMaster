@@ -127,16 +127,4 @@ def order(request, movie_id):
     return render(request, 'order.html', {'items': movies, 'number': len(movies)})
 
 
-    def searchbar(request):
-        if request.method == "POST":
-            searched = request.POST['searched']
-            print(searched)
-            all_movies = Movie.objects.filter(title__contains=searched)
-            print(all_movies)
-            if len(all_movies) > 1:
-                return render(request, 'searchbar.html',{'data': all_movies})
-            else:
-                return render(request, '404.html')
-        else:
-            return render(request, '404.html')
 

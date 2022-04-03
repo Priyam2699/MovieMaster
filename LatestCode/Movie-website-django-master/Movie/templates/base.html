@@ -34,16 +34,8 @@
                     <a href="/movie/actor_all/1"><span class="glyphicon glyphicon-user"></span> Actors</a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" method=POST action="/movie/searchbar/">
-                 {% csrf_token %}
-                <input type="text" name="searched" id="search-input" class="form-control"
-                       placeholder="Search Movies"
-                       onkeyup="start_timer()" size="55" autocomplete="off" required/>
-                <input type="submit" class="btn btn-default" name="search" value="Submit"/>
-            </form>
-
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
+                        <ul class="nav navbar-nav navbar-right">
+ {% if user.is_authenticated %}
                     <li>
                         <p class="navbar-text" style="color:#fff9fe;">
                             Welcome, {{ user.username }}</p></li>
@@ -132,7 +124,6 @@
 
 {% block mainbody %}
     {% load static %}
-
     <div style=" margin-left: 1%;">
         <p style="color: black; font-size: large; padding-top: 25px"><b>Trending Now:</b></p>
         {% for movie in popular %}
