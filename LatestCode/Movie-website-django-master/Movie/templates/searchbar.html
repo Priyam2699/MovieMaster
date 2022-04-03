@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+     <div id="container">
+        {% for movie in data %}
+            <table>
+                <td>
+                    <img src="{{ movie.poster }}" alt="Error Loading the photo" height="160" width="100" style="padding: 1px">
+                </td>
+                <td>
+                    <h4>
+                        <a href="/movie/movie_detail/{{ movie.movieid }}">{{ movie.title }}</a>
+                    </h4>
+                </td>
+            </table>
+            <hr>
+        {% endfor %}
+     </div>
+
+
+{% endblock %}
