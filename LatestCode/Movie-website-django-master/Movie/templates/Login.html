@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+
+    <div id="container">
+    <h2 align="center"> Login</h2>
+
+{#        <div class="imgcontainer">#}
+{#            {% load static %}#}
+{#            <img src="{% static "images/movie.jpg" %}" alt="Avatar" class="avatar">#}
+{#        </div>#}
+
+{#        {% if error %}#}
+{#            <div class="error">#}
+{#                <p style="color:red;">{{ error }}</p>#}
+{#            </div>#}
+{#        {% endif %}#}
+
+{#        <div class="container">#}
+{#            {% csrf_token %}#}
+{#            #}
+{#           #}
+{#            <button type="submit">Register</button>#}
+{#        </div>#}
+
+    <form class="form" role="form" method="post" action="/user/login/"
+                                              accept-charset="UTF-8" id="login-nav">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">User Name</label>
+                                                <input name='username' class="form-control" id="exampleInputEmail2"
+                                                       placeholder="User Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                <input name="password" type="password" class="form-control"
+                                                       id="exampleInputPassword2" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Sign in"/>
+                                            </div>
+                                        </form>
+                                        <div class="bottom text-center">
+                                        New here ? <a href="/user/register/"><b>Join Us</b></a>
+                                    </div>
+
+</div>
+{% endblock %}

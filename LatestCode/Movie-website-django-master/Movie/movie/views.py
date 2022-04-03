@@ -44,9 +44,9 @@ def whole_list(request, page):
     distance = pages - page
     start_page_num = 1
 
-    if distance >= 5 and page > 5:
+    if distance >= 5 and page > 5:# if these are initial pages
         start_page_num = page - 5
-    elif distance < 5:
+    elif distance < 5: # if its thelast pages
         start_page_num = page - 10 + distance
 
     end_page_num = 10
@@ -140,3 +140,5 @@ def searchbar(request):
             return render(request, 'searchbar.html', {'data': all_movies})
         else:
             return render(request, '404.html')
+
+
