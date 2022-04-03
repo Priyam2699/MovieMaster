@@ -79,13 +79,7 @@ def add_seen(request, movie_id):
 
 
 @django.views.decorators.csrf.csrf_protect
-def seen(request, movie_id):
-    if request.POST:
-        try:
-            d = Seen.objects.get(username=request.user.get_username(), movieid_id=movie_id)
-            d.delete()
-        except:
-            return render(request, '404.html')
+def seen(request):
     records = Seen.objects.filter(username=request.user.get_username())
     movies = []
     for record in records:
@@ -112,21 +106,13 @@ def add_order(request, movie_id):
 
 
 @django.views.decorators.csrf.csrf_protect
-def order(request, movie_id):
-    if request.POST:
-        try:
-            d = Order.objects.get(username=request.user.get_username(), movieid_id=movie_id)
-            d.delete()
-        except:
-            return render(request, '404.html')
+def order(request):
     records = Order.objects.filter(username=request.user.get_username())
     movies = []
     for record in records:
         movie_id = str(record).split('|')[1]
         movies.append(Movie.objects.get(movieid=movie_id))
     return render(request, 'order.html', {'items': movies, 'number': len(movies)})
-
-
 
 def searchbar(request):
     if request.method != "POST":

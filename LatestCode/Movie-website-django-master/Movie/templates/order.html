@@ -6,12 +6,6 @@
 
         {% for item in items %}
             <h2><a href="/movie/movie_detail/{{ item.movieid }}" target="_self">{{ item.title }}</a></h2>
-
-            <form role="form" action="/movie/order/{{ item.movieid }}" method="post">
-                {% csrf_token %}
-
-            </form>
-
             <img border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="200" height="320">
             <hr>
         {% endfor %}

@@ -7,8 +7,8 @@ urlpatterns = [
     path('actor_detail/<str:id>', views.detail, {'model': models.Actor}, name='actor_detail'),
     path('actor_all/<int:page>', views.whole_list, name='whole_list'),
     path('searchbar/', views.searchbar, name='searchbar'),
-    re_path(r'^seen/(?P<movie_id>)', views.seen, name='seen'),
+    path('seen/', views.seen, name='seen'),
     path('add_seen/<str:movie_id>', views.add_seen, name='seen'),
-    re_path(r'^order/(?P<movie_id>)', views.order, name='order'),
+    path('order/', views.order, name='order'),
     path('add_order/<str:movie_id>', views.add_order, name='order'),
 ]
