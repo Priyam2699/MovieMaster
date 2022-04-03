@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 import django.views.decorators.csrf
 import json
@@ -58,8 +57,10 @@ def whole_list(request, page):
         if 1 <= i <= pages:
             displayPages.append(i)
 
-    data = {'items': actors[20 * (page - 1):lastIndex], 'current_page': page, 'page_number': pages, 'pages': displayPages}
+    data = {'items': actors[20 * (page - 1):lastIndex], 'current_page': page, 'page_number': pages,
+            'pages': displayPages}
     return render(request, 'Allactors.html', data)
+
 
 def add_seen(request, movie_id):
     if not request.is_secure():
@@ -93,7 +94,8 @@ def seen(request, movie_id):
         movies.append(Movie.objects.get(movieid=movie_id))
     return render(request, 'seen.html', {'items': movies, 'number': len(movies)})
 
-#Order
+
+# Order
 def add_order(request, movie_id):
     if not request.is_secure():
         history = Order.objects.filter(movieid_id=movie_id, username=request.user.get_username())
@@ -127,4 +129,15 @@ def order(request, movie_id):
     return render(request, 'order.html', {'items': movies, 'number': len(movies)})
 
 
-
+def searchbar(request):
+    if request.method != "POST":
+        return render(request, '404.html')
+    else:
+        searched = request.POST['searched']
+        print(searched)
+        all_movies = Movie.objects.filter(title__contains=searched)
+        print(all_movies)
+        if len(all_movies) > 1:
+            return render(request, 'searchbar.html', {'data': all_movies})
+        else:
+            return render(request, '404.html')

@@ -34,8 +34,14 @@
                     <a href="/movie/actor_all/1"><span class="glyphicon glyphicon-user"></span> Actors</a>
                 </li>
             </ul>
-                        <ul class="nav navbar-nav navbar-right">
- {% if user.is_authenticated %}
+
+        <form class="navbar-form navbar-left" method=POST action="/movie/searchbar/">
+                 {% csrf_token %}
+                <input type="text" name="searched" class="form-control" placeholder="Search Movies" size="55" autocomplete="off" required/>
+                <input type="submit" class="btn btn-default" name="search" value="Submit"/>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
                     <li>
                         <p class="navbar-text" style="color:#fff9fe;">
                             Welcome, {{ user.username }}</p></li>
@@ -128,7 +134,7 @@
         <p style="color: black; font-size: large; padding-top: 25px"><b>Trending Now:</b></p>
         {% for movie in popular %}
             <a href="/movie/movie_detail/{{ movie.movieid }}">
-                <img id="poster" style="margin-left: 10px; margin-bottom: 5px" class="img-rounded" src="{{ movie.poster }}" width="170" height="220">
+                <img id="poster" style="margin-left: 10px; margin-bottom: 5px" class="img-rounded" src="{{ movie.poster }}" width="110" height="160">
             </a>
         {% endfor %}
     </div>
@@ -138,7 +144,7 @@
         <p style="color: black; font-size: large; padding-top: 25px;"><b>Recommendation For You:</b></p>
         {% for movie in recommendation %}
             <a href="/movie/movie_detail/{{ movie.movieid }}">
-                <img id="poster" style="margin-left: 10px;margin-bottom: 5px" class="img-rounded, mainpgmovies" src="{{ movie.poster }}" width="170" height="220">
+                <img id="poster" style="margin-left: 10px;margin-bottom: 5px" class="img-rounded" src="{{ movie.poster }}" width="110" height="160">
             </a>
         {% endfor %}
     </div>
