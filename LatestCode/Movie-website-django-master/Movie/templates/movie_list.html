@@ -8,9 +8,27 @@
                 <h1>{{ object.name }}</h1>
 
             </div>
-            <div id="main-pic">
-                <img border="0" src="{{ object.photo }}" alt="Cannot load photo, sorry!" width="350" height="400">
+            <div id="actor-pic">
+                <img border="0" src="{{ object.photo }}" alt="Cannot load photo, sorry!" width="250" height="300">
             </div>
         {% endif %}
-
+                <h2>{{ object.name }} starred in the following movie(s):</h2>
+                <hr>
+    </div>
+     {% for item in items %}
+                <table>
+                    <td>
+                        <img border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="180" height="250"
+                             style="padding: 10px; padding-left: 15px">
+                    </td>
+                    <td style="vertical-align: top;text-align: left;padding: 10px;">
+                        <h3><a href="/movie/movie_detail/{{ item.movieid }}"
+                               target="_self">{{ item.title }}({{ item.year }})</a></h3>
+                        <p class="stars">Rate: {{ item.rate }}</p>
+                        <br>
+                        <cite>{{ item.plot }}</cite>
+                    </td>
+                </table>
+                <hr>
+            {% endfor %}
 {% endblock %}
