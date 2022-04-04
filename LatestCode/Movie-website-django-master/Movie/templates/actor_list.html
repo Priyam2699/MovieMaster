@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block mainbody %}
-    <div class="Layer" id="layer"></div>
+{#    <div class="Layer" id="layer">    </div>#}
     <div id="container">
         {% if object %}
             <div id="detail-infro">
@@ -24,7 +24,6 @@
                             $.get("/movie/add_seen/{{ object.movieid }}", function (msg) {
                                 if (msg == "1") {
                                     $("#seen").css({"background-color": "#f44336", "color": "white"});
-                                    $("#expect").css({"background-color": "white", "color": "black"});
                                     $("#message").html("Added to Seen list!").fadeIn("fast").fadeOut("slow");
                                 }
                                 if (msg == "0") {
@@ -74,7 +73,6 @@
                             $.get("/movie/add_order/{{ object.movieid }}", function (msg) {
                                 if (msg == "1") {
                                     $("#order").css({"background-color": "#f44336", "color": "white"});
-                                    {#$("#expect").css({"background-color": "white", "color": "black"});#}
                                     $("#message1").html("Added to Ordered list!").fadeIn("fast").fadeOut("slow");
                                 }
                                 if (msg == "0") {

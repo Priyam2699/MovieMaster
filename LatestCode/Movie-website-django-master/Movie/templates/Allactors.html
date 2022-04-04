@@ -30,8 +30,9 @@
                 {% endif %}
             {% endfor %}
 
+
             {% if current_page != page_number %}
-                <a href="/movie/actor_all/{{ current_page|add:-1 }}" >Next</a>
+                <a href="/movie/actor_all/{{ current_page|add:1 }}" >Next</a>
                 <a href="/movie/actor_all/{{ page_number }}" >Last</a>
             {% endif %}
         {% endif %}

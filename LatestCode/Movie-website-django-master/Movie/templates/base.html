@@ -19,16 +19,11 @@
 <nav class="navbar navbar-default navbar-inverse" role="navigation" style="margin-bottom: 0">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="/">
                 <span class="glyphicon glyphicon-home"></span> Home</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div>
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/movie/actor_all/1"><span class="glyphicon glyphicon-user"></span> Actors</a>
@@ -61,7 +56,7 @@
                     {% if message %}
                         <li><p class="navbar-text" style="color:red;">{{ message }}</p></li>
                     {% endif %}
-                    <li><p class="navbar-text">Already have an account?</p></li>
+                    <li><p class="navbar-text">Already a User?</p></li>
                     <li>
                         <a href="/user/loginForm"><span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
