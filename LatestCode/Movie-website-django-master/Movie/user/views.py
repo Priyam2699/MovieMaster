@@ -37,7 +37,7 @@ def user_register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            return render(request, 'base.html', {'message': 'Registered successfully, congratulations! Please login.'})
+            return render(request, 'login.html', {'message': 'Registered successfully, congratulations! Please login.'})
         else:
             return render(request, 'register.html', {'error': 'Invalid input!', 'form': UserCreationForm()})
     else:
@@ -59,7 +59,7 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile') # Redirect back to profile page
+            return redirect('/') # Redirect back to profile page
 
     else:
         u_form = UserUpdateForm(instance=request.user)
