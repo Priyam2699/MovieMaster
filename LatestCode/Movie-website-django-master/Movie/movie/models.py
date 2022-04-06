@@ -10,7 +10,7 @@ class Movie(models.Model):
     rate = models.IntegerField(default=0)
     poster = models.URLField(default='')
     plot = models.CharField(max_length=500)
-    trailer = models.URLField(default='')
+    trailer = models.URLField(max_length=500, default='')
 
     def __str__(self):
         return self.movieid + '|' + self.title
