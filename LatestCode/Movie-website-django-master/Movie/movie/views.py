@@ -1,5 +1,7 @@
 
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.http import HttpResponsePermanentRedirect
 import django.views.decorators.csrf
 import json
 from movie.models import *
@@ -126,16 +128,7 @@ def delete_order(request, movie_id):
 
     Order.objects.filter(movieid_id=movie_id, username=request.user.get_username()).delete()
     # Order.objects.filter(movieid_id=movie_id, username=request.user.get_username())
-    # return redirect("movie:order")
-    movies = []
-    price = 0
-    records = Order.objects.filter(username=request.user.get_username())
-    for record in records:
-        movie_id = str(record).split('|')[1]
-        rc= Movie.objects.get(movieid=movie_id)
-        price= rc.price+price
-        movies.append(Movie.objects.get(movieid=movie_id))
-    return render(request, 'order.html', {'items': movies, 'number': len(movies), 'totalamount': price})
+    return HttpResponsePermanentRedirect(reverse('order'))
 
 def searchbar(request):
     if request.method != "POST":
