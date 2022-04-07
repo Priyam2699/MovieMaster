@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import django.views.decorators.csrf
 import json
 from movie.models import *
@@ -96,6 +96,7 @@ def add_order(request, movie_id):
         if len(history) == 0:
             movie = Popularity.objects.get(movieid_id=movie_id)
             weight = movie.weight
+            # totalamount=
             movie.delete()
             new_record = Popularity(movieid_id=movie_id, weight=weight + 3)
             new_record.save()
@@ -110,11 +111,31 @@ def add_order(request, movie_id):
 @django.views.decorators.csrf.csrf_protect
 def order(request):
     records = Order.objects.filter(username=request.user.get_username())
+    price=0
+
     movies = []
     for record in records:
         movie_id = str(record).split('|')[1]
+        rc= Movie.objects.get(movieid=movie_id)
+        price= rc.price+price
         movies.append(Movie.objects.get(movieid=movie_id))
-    return render(request, 'order.html', {'items': movies, 'number': len(movies)})
+    return render(request, 'order.html', {'items': movies, 'number': len(movies), 'totalamount': price})
+
+@django.views.decorators.csrf.csrf_protect
+def delete_order(request, movie_id):
+
+    Order.objects.filter(movieid_id=movie_id, username=request.user.get_username()).delete()
+    # Order.objects.filter(movieid_id=movie_id, username=request.user.get_username())
+    # return redirect("movie:order")
+    movies = []
+    price = 0
+    records = Order.objects.filter(username=request.user.get_username())
+    for record in records:
+        movie_id = str(record).split('|')[1]
+        rc= Movie.objects.get(movieid=movie_id)
+        price= rc.price+price
+        movies.append(Movie.objects.get(movieid=movie_id))
+    return render(request, 'order.html', {'items': movies, 'number': len(movies), 'totalamount': price})
 
 def searchbar(request):
     if request.method != "POST":

@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 
 # Create a UserUpdateForm to update username
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
 
     class Meta:
         model = User

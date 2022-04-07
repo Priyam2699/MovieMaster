@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_seen/<str:movie_id>', views.add_seen, name='seen'),
     path('order/', views.order, name='order'),
     path('add_order/<str:movie_id>', views.add_order, name='order'),
+    path('delete_order/<str:movie_id>', views.delete_order, name='delete_order'),
 ]

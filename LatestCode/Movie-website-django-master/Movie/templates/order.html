@@ -3,12 +3,31 @@
 {% block mainbody %}
     <div id="container">
         <h2>{{ number }} movie(s) in your Order List:</h2>
+         <p style="font-size:large "> Total price of movies are {{ totalamount }} CAD<p>
 
         {% for item in items %}
-            <h2><a href="/movie/movie_detail/{{ item.movieid }}" target="_self">{{ item.title }}</a></h2>
-            <img border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="200" height="320">
-            <hr>
+{#            <h2><a href="/movie/movie_detail/{{ item.movieid }}" target="_self">{{ item.title }}</a></h2>#}
+{#            <h2 style="font-size: medium"> price of item: {{ item.price }}</h2>#}
+{#            <img border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="200" height="250">#}
+{#            <hr>#}
+            <table>
+                <tr>
+                    <td style="margin: 1%;padding: 10px">
+                         <img border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="120" height="170">
+                    </td>
+                    <td style="vertical-align: top">
+                        <h2><a href="/movie/movie_detail/{{ item.movieid }}" style="font-size: 20px">{{ item.title }}</a></h2>
+                            <h2 style="font-size: medium"> Price: {{ item.price }} CAD</h2>
+                         <form method="POST" action="/movie/delete_order/{{ item.movieid }}" style="width: 140px">
+ {% csrf_token %}
+                              <input type="submit" maxlength="10" class="btn btn-primary btn-block" value="Delete from Cart"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
         {% endfor %}
+
+
     </div>
 
 {% endblock %}

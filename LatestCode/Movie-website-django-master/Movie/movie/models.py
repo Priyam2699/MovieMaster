@@ -11,6 +11,7 @@ class Movie(models.Model):
     poster = models.URLField(default='')
     plot = models.CharField(max_length=500)
     trailer = models.URLField(max_length=500, default='')
+    price = models.IntegerField(default=100)
 
     def __str__(self):
         return self.movieid + '|' + self.title
@@ -58,6 +59,7 @@ class Seen(models.Model):
 class Order(models.Model):
     username = models.CharField(max_length=150)
     movieid = models.ForeignKey('Movie', default=1, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.username + '|' + self.movieid.movieid
