@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Import User UpdateForm, ProfileUpdatForm
 from .forms import  UserUpdateForm, ProfileUpdateForm
+from .forms import  CustomUserCreationForm
+from django import forms
 
 # Create your views here.
 @csrf_protect
@@ -34,14 +36,15 @@ def user_logout(request):
 @csrf_protect
 def user_register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             return render(request, 'login.html', {'message': 'Registered successfully, congratulations! Please login.'})
         else:
-            return render(request, 'register.html', {'error': 'Invalid input!', 'form': UserCreationForm()})
+            print(form.errors )
+            return render(request, 'register.html', {'message':  list(form.errors.values()) , 'form': CustomUserCreationForm()})
     else:
-        return render(request, "register.html", {'form': UserCreationForm()})
+        return render(request, "register.html", {'form': CustomUserCreationForm()})
 
 
 def loginForm(request):

@@ -12,7 +12,7 @@
             border: 3px solid #f1f1f1;
         }
 
-        input[type=text], input[type=password] {
+        input[type=text], input[type=password],input[type=Email] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -42,6 +42,14 @@
 </head>
 <body>
 <div id="container">
+<div style="color: indianred; font-family: Arial">
+    {% if message %}
+        <h3>Please Correct Below Errors</h3>
+        {% for msg in message %}
+                      <b>{{ msg }} </b>
+        {% endfor %}
+                          {% endif %}
+</div>
     <h2 align="center"> Welcome to Join Us!</h2>
     <form action="" method="post">
         <div class="container">
