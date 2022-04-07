@@ -19,7 +19,9 @@ def detail(request, model, id):
                     items.append(actor)
         if model.get_name() == 'actor':
             label = 'movie'
+            # Get the Actor
             object = model.objects.get(actorid=id)
+            # Get Movie Id's in which Actor is Present
             records = Act.objects.filter(actorid_id=id)
             for query in records:
                 for movie in Movie.objects.filter(movieid=query.movieid_id):
@@ -33,18 +35,18 @@ def whole_list(request, page):
     actors = Actor.objects.all()
     pages = int(math.ceil(len(actors) / 20))
     page = int(page)
-    # find the last index of actor to be displayed
+    # find the last index of actor to be displayed on a page
     lastIndex = 0
     if page < pages:
         lastIndex = page * 20
     else:
         lastIndex = len(actors)
 
-    # finding the list of pages to be displayed at bottom
+    # finding the list of pages to be displayed at bottom at a time
     distance = pages - page
     start_page_num = 1
 
-    if distance >= 5 and page > 5:# if these are initial pages
+    if distance >= 5:# if these are initial pages
         start_page_num = page - 5
     elif distance < 5: # if its thelast pages
         start_page_num = page - 10 + distance
