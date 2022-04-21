@@ -69,9 +69,14 @@ def add_seen(request, movie_id):
     if not request.is_secure():
         history = Seen.objects.filter(movieid_id=movie_id, username=request.user.get_username())
         if len(history) == 0:
-            movie = Popularity.objects.get(movieid_id=movie_id)
-            weight = movie.weight
-            movie.delete()
+            weight=0
+            try:
+                movie = Popularity.objects.get(movieid_id=movie_id)
+                weight = movie.weight
+                movie.delete()
+            except:
+                movie=None
+
             new_record = Popularity(movieid_id=movie_id, weight=weight + 3)
             new_record.save()
             new_record = Seen(movieid_id=movie_id, username=request.user.get_username())
@@ -96,10 +101,13 @@ def add_order(request, movie_id):
     if not request.is_secure():
         history = Order.objects.filter(movieid_id=movie_id, username=request.user.get_username())
         if len(history) == 0:
-            movie = Popularity.objects.get(movieid_id=movie_id)
-            weight = movie.weight
-            # totalamount=
-            movie.delete()
+            weight = 0
+            try:
+                movie = Popularity.objects.get(movieid_id=movie_id)
+                weight = movie.weight
+                movie.delete()
+            except:
+                movie=None
             new_record = Popularity(movieid_id=movie_id, weight=weight + 3)
             new_record.save()
             new_record = Order(movieid_id=movie_id, username=request.user.get_username())
