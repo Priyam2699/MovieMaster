@@ -51,7 +51,7 @@ class Popularity(models.Model):
 
 
 class Seen(models.Model):
-    username = models.CharField(max_length=150)
+    username = models.CharField(max_length=200)
     movieid = models.ForeignKey('Movie', default=1, on_delete=models.CASCADE)
 
     def __str__(self):
