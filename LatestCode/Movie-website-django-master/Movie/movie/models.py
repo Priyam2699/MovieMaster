@@ -22,7 +22,7 @@ class Movie(models.Model):
 
 
 class Actor(models.Model):
-    actorid = models.CharField(max_length=20, primary_key=True)
+    actorid = models.CharField(max_length=30, primary_key=True)
     name = models.CharField(max_length=30)
     photo = models.URLField()
 
